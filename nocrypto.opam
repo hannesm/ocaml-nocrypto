@@ -20,6 +20,7 @@ depends: [
   "cstruct" {>="3.0.0"}
   "ocplib-endian"
   "zarith"
+  "bigarray-compat"
   ("mirage-no-xen" | ("mirage-xen" & "zarith-xen"))
   ("mirage-no-solo5" | ("mirage-solo5" & "zarith-freestanding"))
 ]

@@ -1,5 +1,5 @@
 
-open Bigarray
+open Bigarray_compat
 
 let buffer = Array1.create char c_layout
 
