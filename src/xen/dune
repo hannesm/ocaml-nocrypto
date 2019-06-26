@@ -1,0 +1,42 @@
+(library
+ (name nocrypto_xen)
+ (public_name nocrypto.xen)
+ (optional)
+ (libraries bigarray-compat ocaml-freestanding)
+ (c_names misc
+           md5 sha1 sha256 sha512 stubs
+           aes_generic aes_aesni ghash_generic ghash_pclmul
+           des_generic)
+ (c_flags --std=c99 -Wall -Wextra -O3 -D_DEFAULT_SOURCE
+           -Wno-implicit-fallthrough
+           (:include c_flags.sexp)
+           (:include cflags.sexp)))
+
+(rule (copy# ../native/nocrypto.h nocrypto.h))
+(rule (copy# ../native/endian.h endian.h))
+(rule (copy# ../native/misc.c misc.c))
+(rule (copy# ../native/aes_aesni.c aes_aesni.c))
+(rule (copy# ../native/aes_generic.c aes_generic.c))
+(rule (copy# ../native/des_generic.c des_generic.c))
+(rule (copy# ../native/des_generic.h des_generic.h))
+(rule (copy# ../native/ghash_generic.c ghash_generic.c))
+(rule (copy# ../native/ghash_pclmul.c ghash_pclmul.c))
+(rule (copy# ../native/bitfn.h bitfn.h))
+(rule (copy# ../native/md5.h md5.h))
+(rule (copy# ../native/sha1.h sha1.h))
+(rule (copy# ../native/sha256.h sha256.h))
+(rule (copy# ../native/sha512.h sha512.h))
+(rule (copy# ../native/md5.c md5.c))
+(rule (copy# ../native/sha1.c sha1.c))
+(rule (copy# ../native/sha256.c sha256.c))
+(rule (copy# ../native/sha512.c sha512.c))
+(rule (copy# ../native/stubs.c stubs.c))
+
+(rule (with-stdout-to c_flags.sexp (run ../../config/cfg.exe)))
+
+(rule
+ (with-stdout-to
+  cflags.sexp
+  (run ./cflags.sh)))
+
+(include_subdirs no)
