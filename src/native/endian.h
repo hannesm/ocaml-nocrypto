@@ -27,7 +27,7 @@
 #include <endian.h>
 
 /* For freestanding builds */
-#define	__bswap16_gen(x)	(__uint16_t)((x) << 8 | (x) >> 8)
+#define	__bswap16_gen(x)	(uint16_t)((x) << 8 | (x) >> 8)
 #define	__bswap32_gen(x)		\
 	(((__uint32_t)__bswap16((x) & 0xffff) << 16) | __bswap16((x) >> 16))
 #define	__bswap64_gen(x)		\
