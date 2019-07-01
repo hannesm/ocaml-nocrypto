@@ -2,7 +2,7 @@
  (name nocrypto_xen)
  (public_name nocrypto.xen)
  (optional)
- (libraries bigarray-compat ocaml-freestanding)
+ (libraries bigarray-compat mirage-xen-posix)
  (c_names misc
            md5 sha1 sha256 sha512 stubs
            aes_generic aes_aesni ghash_generic ghash_pclmul
