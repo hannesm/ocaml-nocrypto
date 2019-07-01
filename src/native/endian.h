@@ -24,7 +24,7 @@
 #else
 
 /* Needs _DEFAULT_SOURCE with glibc */
-#include <endian.h>
+//#include <endian.h>
 
 /* For freestanding builds */
 #define	__bswap16_gen(x)	(uint16_t)((x) << 8 | (x) >> 8)
@@ -32,6 +32,29 @@
 	(((__uint32_t)__bswap16((x) & 0xffff) << 16) | __bswap16((x) >> 16))
 #define	__bswap64_gen(x)		\
 	(((__uint64_t)__bswap32((x) & 0xffffffff) << 32) | __bswap32((x) >> 32))
+
+/* These are defined as functions to avoid multiple evaluation of x. */
+
+static __inline __uint16_t
+__bswap16_var(__uint16_t _x)
+{
+
+        return (__bswap16_gen(_x));
+}
+
+static __inline __uint32_t
+__bswap32_var(__uint32_t _x)
+{
+
+          return (__bswap32_gen(_x));
+}
+
+static __inline __uint64_t
+__bswap64_var(__uint64_t _x)
+{
+
+        return (__bswap64_gen(_x));
+}
 
 #define	__bswap16(x)				\
 	((__uint16_t)(__builtin_constant_p(x) ?	\
